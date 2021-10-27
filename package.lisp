@@ -10,6 +10,10 @@
   (:import-from :aws-sign4)
   (:import-from :flexi-streams)
   (:export
+   #:*default-credentials*
+   #:*default-region*
+   #:list-tables
+   #:credentials-from-envvars
    #:credentials-from-profile))
 
 (in-package #:alternator)
