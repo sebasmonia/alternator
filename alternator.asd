@@ -9,6 +9,7 @@
   :depends-on (#:alexandria
                #:uiop
                #:dexador
+               #:shasht
                #:py-configparser
                #:aws-sign4
                #:flexi-streams)
