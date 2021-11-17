@@ -20,7 +20,7 @@
         (value (car (alexandria:hash-table-values leaf-ht))))
     (cond
       ((equal type "N") (read-from-string value))
-      ((equal type "BOOL") (if (equal "true" value)
+      ((equal type "BOOL") (if value
                                :true
                                :false))
       ((equal type "M") (unmarshall-as-alist value))
@@ -51,7 +51,8 @@
           collect (cons key (unmarshall-convert-type value))))
 
 (defun unmarshall-get-item (parsed-json)
-  (unmarshall-as-alist (gethash "Item" parsed-json)))
+  (alexandria:when-let ((item (gethash "Item" parsed-json)))
+    (unmarshall-as-alist item)))
 
 ;; (defun marshall-type (value)
 ;;   (typecase value
