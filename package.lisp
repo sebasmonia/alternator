@@ -13,6 +13,7 @@
   (:export
    #:*default-credentials*
    #:*default-region*
+   #:*default-lispify*
    #:list-tables
    #:get-item
    #:credentials-from-envvars

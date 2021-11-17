@@ -16,4 +16,5 @@
   :components ((:file "package")
                (:file "request")
                (:file "credentials")
+               (:file "serialization")
                (:file "alternator")))
