@@ -20,9 +20,9 @@
                                :false))
       ((equal type "M") (unmarshall-hash-table value))
       ((equal type "L")  (unmarshall-vector value))
-      ((equal type "SS") (unmarshall-vector value))
-      ((equal type "NS") (unmarshall-vector value))
       ;; TODO: add binary conversion
+      ;; The "default" value covers handling NS (number set) and SS (string set) as
+      ;; vectors with values of the same type
       (t value))))
 
 (defun unmarshall-vector (a-vector)
