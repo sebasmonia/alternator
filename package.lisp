@@ -9,6 +9,7 @@
   (:import-from :py-configparser)
   (:import-from :aws-sign4)
   (:import-from :shasht)
+  (:import-from :s-base64)
   (:import-from :flexi-streams)
   (:export
    #:*default-credentials*

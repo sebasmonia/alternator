@@ -20,7 +20,10 @@
                                :false))
       ((equal type "M") (unmarshall-hash-table value))
       ((equal type "L")  (unmarshall-vector value))
-      ;; TODO: add binary conversion
+      ;; Binary data is sent as b64 encoded strings
+      ((equal type "B") (with-input-from-string (base64-from-dynamo value)
+                          (s-base64:decode-base64-bytes base64-from-dynamo)))
+      ;; TODO: add binary set conversion
       ;; The "default" value covers handling NS (number set) and SS (string set) as
       ;; vectors with values of the same type
       (t value))))
@@ -48,9 +51,12 @@
 (defun marshall-convert-type (value)
   (typecase value
     (string (cons "S" value))
-    (vector (cons "L" (coerce (loop for elt across value
-                                     collect (marshall-convert-type elt))
-                               'vector)))
+    ;; problem: how to differentiate Number Set from a Byte Array?
+    (vector (cond ((every #'numberp value) (cons "NS" value))
+                  ((every #'stringp value) (cons "SS" value))
+                  (t (cons "L" (coerce (loop for elt across value
+                                             collect (marshall-convert-type elt))
+                                       'vector)))))
     (number (cons "N" (write-to-string value)))
     (hash-table (list (cons "M" (marshall-hash-table value))))
     ;; :true or :false -- keep as is, shasht will convert them

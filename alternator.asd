@@ -12,6 +12,7 @@
                #:shasht
                #:py-configparser
                #:aws-sign4
+               #:s-base64
                #:flexi-streams)
   :components ((:file "package")
                (:file "request")
