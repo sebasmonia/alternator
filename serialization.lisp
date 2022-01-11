@@ -53,8 +53,8 @@
                                'vector)))
     (number (cons "N" (write-to-string value)))
     (hash-table (list (cons "M" (marshall-hash-table value))))
-    ;; :true or :false to string
-    (keyword (cons "BOOL" (print (string-downcase (symbol-name value)))))
+    ;; :true or :false -- keep as is, shasht will convert them
+    (keyword (cons "BOOL" value))
     ;; I know this will fail, so if I hit this value, it means I need
     ;; to add a new conversion
     ;; TODO: add binary conversion
